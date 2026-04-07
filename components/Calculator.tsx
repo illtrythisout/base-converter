@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import convertBase from '@/utils/convertBase';
 
 const Calculator = () => {
+  const [input, setInput] = useState('');
+  const [inputBase, setInputBase] = useState(10);
+  const [outputBase, setOutputBase] = useState(16);
+
   return (
     <View style={styles.root}>
       {/* Input */}
@@ -11,8 +16,12 @@ const Calculator = () => {
           keyboardType="number-pad"
           style={[styles.text, styles.numberPad]}
           defaultValue="10"
+          onChangeText={(text) => setInputBase(Number(text))}
         />
-        <TextInput style={[styles.text, styles.display]} />
+        <TextInput
+          style={[styles.text, styles.display]}
+          onChangeText={(text) => setInput(text)}
+        />
       </View>
       {/* Output */}
       <Text style={[styles.text, styles.header]}>Result</Text>
@@ -21,8 +30,11 @@ const Calculator = () => {
           keyboardType="number-pad"
           style={[styles.text, styles.numberPad]}
           defaultValue="16"
+          onChangeText={(text) => setOutputBase(Number(text))}
         />
-        <Text style={[styles.text, styles.display]}></Text>
+        <Text style={[styles.text, styles.display]}>
+          {convertBase(input, inputBase, outputBase)}
+        </Text>
       </View>
     </View>
   );
