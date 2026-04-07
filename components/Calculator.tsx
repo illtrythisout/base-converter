@@ -13,7 +13,7 @@ const Calculator = () => {
       <Text style={[styles.text, styles.header]}>Input</Text>
       <View style={styles.displayWrapper}>
         <TextInput
-          keyboardType="number-pad"
+          keyboardType="numeric"
           style={[styles.text, styles.numberPad]}
           defaultValue="10"
           onChangeText={(text) => setInputBase(Number(text))}
@@ -27,7 +27,7 @@ const Calculator = () => {
       <Text style={[styles.text, styles.header]}>Result</Text>
       <View style={styles.displayWrapper}>
         <TextInput
-          keyboardType="number-pad"
+          keyboardType="numeric"
           style={[styles.text, styles.numberPad]}
           defaultValue="16"
           onChangeText={(text) => setOutputBase(Number(text))}
@@ -36,6 +36,10 @@ const Calculator = () => {
           {convertBase(input, inputBase, outputBase)}
         </Text>
       </View>
+      {/* Disclaimer */}
+      <Text style={[styles.text, styles.footnote]}>
+        *Only works until base 36
+      </Text>
     </View>
   );
 };
@@ -60,6 +64,11 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 8,
     fontWeight: 'bold',
+  },
+  footnote: {
+    alignSelf: 'flex-end',
+    fontSize: 16,
+    color: 'grey',
   },
   text: {
     fontSize: 24,
